@@ -1,19 +1,15 @@
 import { IsEmail, IsNotEmpty, MinLength } from "class-validator";
-import { ValidaEmailUnico } from "../validacao/Email.Unico.Validator";
-import { Optional } from "@nestjs/common";
+import { ValidaEmailUnico } from "../validacao/EmailUnico.Validator";
 
-export class AtualizaUsuarioDTO {
+export class CriaUsuarioDTO {
 
     @IsNotEmpty({message: 'nome não pode ser vazio'})
-    @Optional()
     nome: string;
 
     @IsEmail(undefined, {message: 'email informado inválido'})
     @ValidaEmailUnico({message: 'Já existe usuário cadastrado com este email'})
-    @Optional()
     email: string;
 
     @MinLength(6, { message: 'senha precisa ter pelo menos 6 caracteres'})
-    @Optional()
     senha: string;
 }
